@@ -6,5 +6,6 @@
 4) Перейдите по предложенной ссылке
 
 Пример файла .env:
+
     SECRET_KEY=very_secret_key_123
     DEBUG=True
