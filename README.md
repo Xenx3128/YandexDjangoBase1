@@ -9,6 +9,7 @@
 
 
     "python -m venv venv"
+
     "venv/Scripts/activate"
 4) Установите необходимые библиотеки из requirements.txt:
 
