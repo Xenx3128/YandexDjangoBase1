@@ -28,7 +28,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        python lyceum/manage.py test
+        python lyceum/manage.py test lyceum/
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
         DEBUG: ${{ secrets.DEBUG }}
