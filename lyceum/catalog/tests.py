@@ -16,6 +16,10 @@ class ItemRegexTest(TestCase):
         response = Client().get('/catalog/1')
         self.assertEqual(response.status_code, 200)
 
+    def test_catalog_item_multiple_num_endpoint(self):
+        response = Client().get('/catalog/100')
+        self.assertEqual(response.status_code, 200)
+
     def test_catalog_item_wrong_address(self):
         response = Client().get('/catalogs/1')
         self.assertEqual(response.status_code, 404)
