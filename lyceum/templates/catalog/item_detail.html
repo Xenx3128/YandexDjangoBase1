@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ item.name }} :: {{ block.super }}
+{% endblock %}
+  
+{% block content %}
+<a class="btn btn-danger card-button" role="button" aria-disabled="true" href="{% url 'catalog:item_list' %}">Вернуться к каталогу</a>
+<h2>{{ item.name }}</h2>
+<div class="card mb-3" style="max-width: 1300px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        {% if item.main_image %}
+        <img src="{{ item.main_image.url }}" class="img-fluid rounded-start" alt="Image">
+        {% else %}
+        <img src="{% static 'img/placeholder_image.jpg' %}" class="img-fluid rounded-start" alt="Image">
+        {% endif %}
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h4 class="card-title">{{ item.name }}</h5>
+          <hr>
+          <p class="card-text">{{ item.text }}</p>
+        </div>
+      </div>  
+    </div>
+</div>
+{% endblock %}

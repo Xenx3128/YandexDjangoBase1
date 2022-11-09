@@ -1,0 +1,20 @@
+.navbar {
+  background-color: rgb(255, 106, 0);
+  border: 1px solid black;
+  font: 1.2em "Fira Sans", sans-serif;
+  margin-bottom: 10px;
+}
+.nav-item {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.nav-link.active,
+.nav-item:hover .nav-link {
+    color: #ffffff;
+    background-color: #de3b26;
+}
+
+.card {
+  box-shadow: -2px -2px 5px black;
+  font: 1.2em "Fira Sans", sans-serif; 
+}

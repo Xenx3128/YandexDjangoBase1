@@ -1,5 +1,5 @@
 Диаграмма БД: 
-https://app.quickdatabasediagrams.com/#/d/J5fBMs
+https://app.quickdatabasediagrams.com/#/d/cvB105
 ---
 Инструкция по разворачиванию (для ОС Linux):
 1) Скопируйте файлы из репозитория, в корневой папке проекта
