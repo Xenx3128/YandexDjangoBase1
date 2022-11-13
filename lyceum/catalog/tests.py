@@ -1,5 +1,6 @@
 from django.test import Client, TestCase
 from django.core.exceptions import ValidationError
+from django.urls import reverse
 
 from catalog.models import Item, Category, Tag
 
@@ -59,3 +60,10 @@ class ModelsTest(TestCase):
         self.item.tags.add(self.tag)
 
         self.assertEqual(Item.objects.count(), item_count + 1)
+
+
+class TaskPagesTest(TestCase):
+    def test_catalog_item_list_show_correct_context(self):
+        response = Client().get(reverse('catalog:item_list'))
+        self.assertIn('items', response.context)
+        self.assertIn('app_name', response.context)

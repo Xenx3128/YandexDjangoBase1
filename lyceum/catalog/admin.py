@@ -16,8 +16,8 @@ class SecondaryImageInline(AdminImageMixin, admin.StackedInline):
 @admin.register(Item)
 class ItemAdmin(AdminImageMixin, SummernoteModelAdmin):
     summernote_fields = 'text'
-    list_display = ('name', 'is_published', 'image_tmb')
-    list_editable = ('is_published',)
+    list_display = ('name', 'is_published', 'image_tmb', 'is_on_main')
+    list_editable = ('is_published', 'is_on_main')
     list_display_links = ('name',)
     filter_horizontal = ('tags',)
     readonly_fields = ('image_tmb',)

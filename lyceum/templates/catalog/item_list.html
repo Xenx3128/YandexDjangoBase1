@@ -8,29 +8,11 @@
 {% block content %}
 <h2>
     <div>Все товары </div>
-    <div style="color: #c4c4c4;">{{items.count}} Товаров</div>
+    <div style="color: #8f8f8f;">{{items.count}} Товаров</div>
 </h2>
-{% for item in items %}
-{% if item.is_published %}
-<div class="card mb-3" style="max-width: 800px;">
-    <div class="row g-0">
-      <div class="col-md-4">
-        {% if item.main_image %}
-        <img src="{{ item.main_image.url }}" class="img-fluid rounded-start" alt="Image">
-        {% else %}
-        <img src="{% static 'img/placeholder_image.jpg' %}" class="img-fluid rounded-start" alt="Image">
-        {% endif %}
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h4 class="card-title">{{ item.name }}</h5>
-          <hr>
-          <p class="card-text">{{ item.text|truncatewords:50 }}</p>
-          <a class="btn btn-danger card-button" role="button" aria-disabled="true" href="{{ item.get_absolute_url }}">Подробнее...</a>
-        </div>
-      </div>  
-    </div>
-</div>
-{% endif %}
-{% endfor %}
+
+{% block item_card %}
+{% include 'includes/item_card.html' %}
+{% endblock %}
+
 {% endblock %}

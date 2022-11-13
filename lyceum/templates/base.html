@@ -12,7 +12,7 @@
     <title>{% block title %}Resupply: Товары со Всего Мира{% endblock %}</title>
   </head>
   <body>
-    <header>
+    <header id="header">
       {% block header %}
       {% include 'includes/header.html' %}
       {% endblock %}
@@ -27,11 +27,11 @@
       </div>
       
     </main>
-    <hr>
-    <footer>
+    <footer id="footer">
       {% block footer %}
       {% include 'includes/footer.html' %}
       {% endblock %}
     </footer>
+    
   </body>
 </html>

@@ -38,7 +38,33 @@ class Category(PublishableBaseModel):
         verbose_name_plural = 'Категории'
 
 
+class ItemManager(models.Manager):
+    def published_main(self):
+        return (
+            self.get_queryset()
+                .filter(is_published=True, is_on_main=True)
+                .select_related('category')
+                .order_by('name')
+                .prefetch_related(
+                    models.Prefetch('tags', queryset=Tag.objects.all())
+                )
+        )
+
+    def published_by_category(self):
+        return (
+            self.get_queryset()
+                .filter(is_published=True)
+                .select_related('category')
+                .order_by('category__name', 'name')
+                .prefetch_related(
+                    models.Prefetch('tags', queryset=Tag.objects.all())
+                )
+        )
+
+
 class Item(PublishableBaseModel):
+    objects = ItemManager()
+
     text = models.TextField('Описание', default='Sample Text',
                             help_text='Описание товара',
                             validators=[validate_words('превосходно',
@@ -47,9 +73,11 @@ class Item(PublishableBaseModel):
                                  help_text='Категория товара',
                                  on_delete=models.CASCADE, null=True,
                                  related_name='items')
+    is_on_main = models.BooleanField(verbose_name='На главной странице',
+                                     default=False)
+
     tags = models.ManyToManyField(Tag, verbose_name='Теги',
                                   help_text='Теги товара')
-
     main_image = models.ImageField(upload_to='images/%Y/%m',
                                    verbose_name='Изображение',
                                    null=True,
