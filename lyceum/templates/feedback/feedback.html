@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %} 
+
+{% block title %}
+Отзывы и предложения :: {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+<form action="" method="post" name="form" enctype="multipart/form-data">
+  {% csrf_token %}
+  <ul>
+    {{ form }}
+    <button class="btn btn-danger" type="submit" href="{% url 'homepage:home' %}">Отправить</button>
+  </ul>
+  
+</form>
+{% endblock %}

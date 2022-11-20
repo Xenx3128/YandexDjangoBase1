@@ -3,9 +3,8 @@
   <div class="container-fluid">
     <img src="{% static 'img/favicon/favicon-32x32.png' %}" alt="Logo" width="32" height="32">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
+      {% with request.resolver_match.view_name as view_name %}
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        {% with request.resolver_match.view_name as view_name %}
         <li class="nav-item">
           <a {% if view_name == 'homepage:home' %}class="nav-link active"{% else %}class="nav-link"{% endif %}aria-current="page" href="{% url 'homepage:home' %}">На главную</a>
         </li>
@@ -15,9 +14,14 @@
         <li class="nav-item">
           <a {% if view_name == 'catalog:item_list' or view_name == 'catalog:item_detail' %}class="nav-link active"{% else %}class="nav-link"{% endif %} aria-current="page" href="{% url 'catalog:item_list' %}">Список товаров</a>
         </li>
-        {% endwith %}
       </ul>
-
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a {% if view_name == 'feedback:feedback' %}class="nav-link active"{% else %}class="nav-link"{% endif %} aria-current="page" href="{% url 'feedback:feedback' %}">Оставить отзыв</a>
+        </li>
+      </ul>
+      
+      {% endwith %}
     </div>
   </div>
 </nav>
