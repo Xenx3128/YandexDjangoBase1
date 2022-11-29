@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %} 
+
+{% block title %}
+Регистрация :: {{ block.super }}
+{% endblock %}
+
+{% block content %}
+  {% block form %}
+    {% include 'includes/base_form.html' %}
+  {% endblock %}
+{% endblock %}

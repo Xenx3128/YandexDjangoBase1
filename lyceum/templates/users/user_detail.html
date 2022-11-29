@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ user.username }} :: {{ block.super }}
+{% endblock %}
+  
+{% block content %}
+    <a class="btn btn-danger card-button" role="button" aria-disabled="true" href="{% url 'users:user_list' %}">Вернуться к списку</a>
+    <h2>Пользователь: {{ user.username }}</h2>
+    <div class="card style="max-width: 1300px;">
+        <div class="card-body">
+          <h5 class="card-title">{{ user.username }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ user.email }}</h6>
+          {% if user.first_name %}
+            <p class="card-text">Имя: {{ user.first_name }}</p>
+          {% else %}
+          <p class="card-text">Имя: <span style="color: #8f8f8f;">Не установлено</span></p>
+          {% endif %}
+          {% if user.last_name %}
+            <p class="card-text">Фамилия: {{ user.last_name }}</p>
+          {% else %}
+            <p class="card-text">Фамилия: <span style="color: #8f8f8f;">Не установлена</span></p>
+          {% endif %}
+          {% if user.birthday %}
+            <p class="card-text">День рождения: {{ user.birthday|date:"d M, Y" }}</p>
+          {% else %}
+            <p class="card-text">День рождения: <span style="color: #8f8f8f;">Не установлен</span></p>
+          {% endif %}
+        </div>
+      </div>
+
+{% endblock %}

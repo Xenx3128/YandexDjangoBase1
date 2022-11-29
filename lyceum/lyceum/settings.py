@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',
     'about.apps.AboutConfig',
     'feedback.apps.FeedbackConfig',
+    'users.apps.UsersConfig',
 
     'sorl.thumbnail',
     'django_summernote',
@@ -109,6 +110,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+AUTH_USER_MODEL = 'users.User'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static_dev')
 ]
@@ -124,3 +127,7 @@ MEDIA_URL = '/media/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = BASE_DIR / 'send_mail'
+
+LOGIN_URL = 'auth/login/'
+LOGIN_REDIRECT_URL = '/auth/profile/'
+LOGOUT_REDIRECT_URL = '/auth/login/'

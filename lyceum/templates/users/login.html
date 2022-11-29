@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %} 
+
+{% block title %}
+Войти в аккаунт :: {{ block.super }}
+{% endblock %}
+
+{% block content %}
+  {% block form %}
+    {% include 'includes/base_form.html' %}
+    <small style="color: #8f8f8f; padding-left: 32px;"><a href="{% url 'users:password_reset' %}" style="text-decoration: none;">Забыли пароль?</a></small>
+  {% endblock %}
+{% endblock %}
