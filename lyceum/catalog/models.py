@@ -16,11 +16,16 @@ class Tag(PublishableBaseModel, NamedBaseModel, SluggedBaseModel):
 
 
 class Category(PublishableBaseModel, NamedBaseModel, SluggedBaseModel):
-    weight = models.IntegerField(default=100,
-                                 help_text='Вес категории',
-                                 validators=(MinValueValidator(1),
-                                             MaxValueValidator(32766)),
-                                 blank=True, null=True)
+    weight = models.IntegerField(
+        default=100,
+        help_text='Вес категории',
+        validators=(
+            MinValueValidator(1),
+            MaxValueValidator(32766),
+        ),
+        blank=True,
+        null=True,
+    )
 
     class Meta:
         verbose_name = 'категория'
@@ -29,23 +34,41 @@ class Category(PublishableBaseModel, NamedBaseModel, SluggedBaseModel):
 
 class Item(PublishableBaseModel, NamedBaseModel):
 
-    text = models.TextField('описание', default='Sample Text',
-                            help_text='Описание товара',
-                            validators=(validate_words('превосходно',
-                                                       'роскошно'),),
-                            blank=True)
-    category = models.ForeignKey(Category, verbose_name='категория',
-                                 help_text='Категория товара',
-                                 on_delete=models.CASCADE, null=True,)
-    is_on_main = models.BooleanField('на главной странице',
-                                     default=False)
+    text = models.TextField(
+        'описание',
+        default='Sample Text',
+        help_text='Описание товара',
+        validators=(
+            validate_words(
+                'превосходно',
+                'роскошно',
+            ),
+        ),
+        blank=True
+    )
+    category = models.ForeignKey(
+        Category,
+        verbose_name='категория',
+        help_text='Категория товара',
+        on_delete=models.CASCADE,
+        null=True,
+    )
+    is_on_main = models.BooleanField(
+        'на главной странице',
+        default=False
+    )
 
-    tags = models.ManyToManyField(Tag, verbose_name='теги',
-                                  help_text='Теги товара')
-    main_image = models.ImageField('изображение',
-                                   upload_to='images/%Y/%m',
-                                   null=True,
-                                   blank=True)
+    tags = models.ManyToManyField(
+        Tag,
+        verbose_name='теги',
+        help_text='Теги товара'
+    )
+    main_image = models.ImageField(
+        'изображение',
+        upload_to='images/%Y/%m',
+        null=True,
+        blank=True,
+        )
 
     objects = ItemManager()
 
@@ -59,8 +82,12 @@ class Item(PublishableBaseModel, NamedBaseModel):
 
     @property
     def get_img(self):
-        return get_thumbnail(self.main_image, '300x300', crop='center',
-                             quality=50)
+        return get_thumbnail(
+            self.main_image,
+            '300x300',
+            crop='center',
+            quality=50
+        )
 
     def image_tmb(self):
         if self.main_image:
@@ -74,11 +101,17 @@ class Item(PublishableBaseModel, NamedBaseModel):
 
 
 class SecondaryImage(NamedBaseModel):
-    image = models.ImageField('Картинка',
-                              upload_to='images/%Y/%m',
-                              null=True)
-    item = models.ForeignKey(Item, verbose_name='товар',
-                             on_delete=models.CASCADE, null=True)
+    image = models.ImageField(
+        'Картинка',
+        upload_to='images/%Y/%m',
+        null=True
+    )
+    item = models.ForeignKey(
+        Item,
+        verbose_name='товар',
+        on_delete=models.CASCADE,
+        null=True
+    )
 
     class Meta:
         verbose_name = 'картинка товара'
@@ -89,8 +122,12 @@ class SecondaryImage(NamedBaseModel):
 
     @property
     def get_img(self):
-        return get_thumbnail(self.image, '300x300', crop='center',
-                             quality=50)
+        return get_thumbnail(
+            self.image,
+            '300x300',
+            crop='center',
+            quality=50
+        )
 
     def sec_image_tmb(self):
         if self.image:

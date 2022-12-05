@@ -42,7 +42,11 @@ def user_list(request):
 
 
 def user_detail(request, pk):
-    user = get_object_or_404(User, pk=pk, is_active=True)
+    user = get_object_or_404(
+        User,
+        pk=pk,
+        is_active=True
+    )
     context = {
         'user': user,
     }
