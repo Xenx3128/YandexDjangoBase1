@@ -1,5 +1,5 @@
 import django.contrib.auth.views as auth_views
-from django.urls import path
+from django.urls import path, re_path
 
 from . import views
 
@@ -42,5 +42,6 @@ urlpatterns = [
     path('signup/', views.register, name='signup'),
     path('profile/', views.profile, name='profile'),
     path('user_list/', views.user_list, name='user_list'),
-    path('user_detail/<int:pk>', views.user_detail, name='user_detail'),
+    re_path(r'^user_detail/(?P<pk>[1-9][0-9]*)/$', views.user_detail,
+            name='user_detail'),
 ]
