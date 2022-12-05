@@ -5,16 +5,16 @@ from django.urls import reverse
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField('Имя пользователя', max_length=150,
+    username = models.CharField('имя пользователя', max_length=150,
                                 help_text='Не более 150 символов')
-    email = models.EmailField('Электронная почта', max_length=254, unique=True,
+    email = models.EmailField('электронная почта', max_length=254, unique=True,
                               help_text='Не более 254 символов')
 
-    first_name = models.CharField('Имя', max_length=254, blank=True, null=True,
+    first_name = models.CharField('имя', max_length=254, blank=True, null=True,
                                   help_text='Не более 254 символов')
-    last_name = models.CharField('Фамилия', max_length=254, blank=True,
+    last_name = models.CharField('фамилия', max_length=254, blank=True,
                                  null=True, help_text='Не более 254 символов')
-    birthday = models.DateField('День рождения', null=True, blank=True)
+    birthday = models.DateField('день рождения', null=True, blank=True)
 
     is_staff = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
@@ -29,5 +29,5 @@ class User(AbstractBaseUser, PermissionsMixin):
         return reverse('users:user_detail', kwargs={"pk": self.pk})
 
     class Meta:
-        verbose_name = 'Пользователь'
-        verbose_name_plural = 'Пользователи'
+        verbose_name = 'пользователь'
+        verbose_name_plural = 'пользователи'
