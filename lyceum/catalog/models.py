@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail
 
+from .managers import ItemManager
 from .validators import validate_words
 
 
@@ -23,30 +24,6 @@ class Category(PublishableBaseModel, NamedBaseModel, SluggedBaseModel):
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
-
-
-class ItemManager(models.Manager):
-    def published_main(self):
-        return (
-            self.get_queryset()
-                .filter(is_published=True, is_on_main=True)
-                .select_related('category')
-                .order_by('name')
-                .prefetch_related(
-                    models.Prefetch('tags', queryset=Tag.objects.all())
-                )
-        )
-
-    def published_by_category(self):
-        return (
-            self.get_queryset()
-                .filter(is_published=True)
-                .select_related('category')
-                .order_by('category__name', 'name')
-                .prefetch_related(
-                    models.Prefetch('tags', queryset=Tag.objects.all())
-                )
-        )
 
 
 class Item(PublishableBaseModel, NamedBaseModel):
