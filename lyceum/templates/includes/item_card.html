@@ -1,7 +1,7 @@
 {% load static %}
 
 {% for item in items %}
-{% if app_name == 'catalog' %}
+{% if request.path == '/catalog/' %}
 {% ifchanged item.category %}
 <hr style="max-width: 800px;">
 <h4>{{ item.category.name }}</h4>
