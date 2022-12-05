@@ -16,8 +16,8 @@ class SignUpForm(UserCreationForm):
         fields = (
             User.username.field.name,
             User.email.field.name,
-            User.password1.field.name,
-            User.password2.field.name,
+            'password1',
+            'password2',
             User.birthday.field.name,
         )
 
