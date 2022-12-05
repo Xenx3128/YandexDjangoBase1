@@ -25,9 +25,11 @@ class ProfileForm(UserChangeForm):
     class Meta:
         model = User
         fields = ('email', 'username', 'first_name', 'last_name', 'birthday')
+        widgets = {
+            'birthday': DateInput(),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['birthday'].widget = DateInput()
         if self.initial['birthday']:
             self.initial['birthday'] = self.instance.birthday.isoformat()
