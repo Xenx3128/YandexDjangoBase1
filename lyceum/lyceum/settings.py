@@ -7,27 +7,18 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'dummykey_insecure_123')
 
-DEBUG = os.getenv('DEBUG')
+DEBUG = os.environ.get('DEBUG', False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
+ALLOWED_HOSTS = [] if not any(ALLOWED_HOSTS) else ALLOWED_HOSTS
 
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
 INSTALLED_APPS = [
-    'homepage.apps.HomepageConfig',
-    'catalog.apps.CatalogConfig',
-    'about.apps.AboutConfig',
-    'feedback.apps.FeedbackConfig',
-    'users.apps.UsersConfig',
-
-    'sorl.thumbnail',
-    'django_summernote',
-    'django_cleanup.apps.CleanupConfig',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -35,6 +26,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+
+    'sorl.thumbnail',
+    'django_summernote',
+    'django_cleanup.apps.CleanupConfig',
+
+    'homepage.apps.HomepageConfig',
+    'catalog.apps.CatalogConfig',
+    'about.apps.AboutConfig',
+    'feedback.apps.FeedbackConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -51,12 +52,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'lyceum.urls'
 
+TEMPLATES_DIR = [
+    BASE_DIR / 'templates',
+]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'templates')
-        ],
+        'DIRS': TEMPLATES_DIR,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -113,21 +115,21 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'users.User'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static_dev')
+    BASE_DIR / 'static_dev',
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = BASE_DIR / 'static'
 
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = BASE_DIR / 'send_mail'
 
-LOGIN_URL = 'auth/login/'
+LOGIN_URL = '/auth/login/'
 LOGIN_REDIRECT_URL = '/auth/profile/'
 LOGOUT_REDIRECT_URL = '/auth/login/'
