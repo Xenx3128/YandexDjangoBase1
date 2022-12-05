@@ -10,7 +10,8 @@ class PublishableBaseModel(models.Model):
 
 
 class NamedBaseModel(models.Model):
-    name = models.CharField('название', max_length=150, blank=True,)
+    name = models.CharField('название', default='Sample name',
+                            max_length=150, blank=True,)
 
     class Meta:
         abstract = True
