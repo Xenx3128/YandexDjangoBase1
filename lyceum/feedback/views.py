@@ -7,7 +7,7 @@ from .models import Feedback
 
 def feedback(request):
     form = FeedbackForm(request.POST or None)
-    if form.is_valid():
+    if request.method == 'POST' and form.is_valid():
         text = form.cleaned_data['text']
         Feedback.objects.create(
             text=text,
