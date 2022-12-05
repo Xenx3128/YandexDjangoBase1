@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'django_cleanup.apps.CleanupConfig',
 
+    'core.apps.CoreConfig',
     'homepage.apps.HomepageConfig',
     'catalog.apps.CatalogConfig',
     'about.apps.AboutConfig',
