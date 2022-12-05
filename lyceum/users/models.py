@@ -21,13 +21,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
 
     objects = UserManager()
-
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
-
-    def get_absolute_url(self):
-        return reverse('users:user_detail', kwargs={"pk": self.pk})
 
     class Meta:
         verbose_name = 'пользователь'
         verbose_name_plural = 'пользователи'
+
+    def get_absolute_url(self):
+        return reverse('users:user_detail', kwargs={"pk": self.pk})

@@ -62,7 +62,6 @@ class ItemManager(models.Manager):
 
 
 class Item(PublishableBaseModel):
-    objects = ItemManager()
 
     text = models.TextField('описание', default='Sample Text',
                             help_text='Описание товара',
@@ -82,6 +81,12 @@ class Item(PublishableBaseModel):
                                    null=True,
                                    blank=True)
 
+    objects = ItemManager()
+
+    class Meta:
+        verbose_name = 'товар'
+        verbose_name_plural = 'товары'
+
     def get_absolute_url(self):
         return reverse('catalog:item_detail', kwargs={"pk": self.pk})
 
@@ -100,10 +105,6 @@ class Item(PublishableBaseModel):
     image_tmb.short_description = 'Главное изображение'
     image_tmb.allow_tags = True
 
-    class Meta:
-        verbose_name = 'товар'
-        verbose_name_plural = 'товары'
-
 
 class SecondaryImage(models.Model):
     name = models.CharField('Название', max_length=150, null=True)
@@ -112,6 +113,13 @@ class SecondaryImage(models.Model):
                               null=True)
     item = models.ForeignKey(Item, verbose_name='товар',
                              on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        verbose_name = 'картинка товара'
+        verbose_name_plural = 'галерея'
+
+    def __str__(self):
+        return self.name
 
     @property
     def get_img(self):
@@ -127,10 +135,3 @@ class SecondaryImage(models.Model):
 
     sec_image_tmb.short_description = 'Галерея'
     sec_image_tmb.allow_tags = True
-
-    class Meta:
-        verbose_name = 'картинка товара'
-        verbose_name_plural = 'галерея'
-
-    def __str__(self):
-        return self.name
