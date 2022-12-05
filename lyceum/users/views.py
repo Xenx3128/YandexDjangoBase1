@@ -34,7 +34,7 @@ def profile(request):
 
 
 def user_list(request):
-    users = User.objects.filter(is_active=1)
+    users = User.objects.filter(is_active=True)
     context = {
         'users': users,
     }
