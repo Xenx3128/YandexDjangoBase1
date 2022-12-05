@@ -1,6 +1,5 @@
-from core.models import PublishableBaseModel
-from django.core.validators import (MaxValueValidator, MinValueValidator,
-                                    RegexValidator)
+from core.models import NamedBaseModel, PublishableBaseModel, SluggedBaseModel
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -8,29 +7,18 @@ from sorl.thumbnail import get_thumbnail
 
 from .validators import validate_words
 
-slug_regex_validator = RegexValidator(r'^[0-9a-zA-Z\-_]*$',
-                                      'Разрешены только цифры, буквы латиницы,'
-                                      'символы \'-\' и \'_\'')
 
-
-class Tag(PublishableBaseModel):
-    slug = models.CharField('слаг', max_length=200, unique=True,
-                            help_text='Слаг тега',
-                            validators=[slug_regex_validator])
-
+class Tag(PublishableBaseModel, NamedBaseModel, SluggedBaseModel):
     class Meta:
         verbose_name = 'тег'
         verbose_name_plural = 'теги'
 
 
-class Category(PublishableBaseModel):
-    slug = models.CharField('слаг', max_length=200, unique=True,
-                            help_text='Слаг категории',
-                            validators=[slug_regex_validator])
+class Category(PublishableBaseModel, NamedBaseModel, SluggedBaseModel):
     weight = models.IntegerField(default=100,
                                  help_text='Вес категории',
-                                 validators=[MinValueValidator(1),
-                                             MaxValueValidator(32766)])
+                                 validators=(MinValueValidator(1),
+                                             MaxValueValidator(32766)))
 
     class Meta:
         verbose_name = 'категория'
@@ -61,12 +49,12 @@ class ItemManager(models.Manager):
         )
 
 
-class Item(PublishableBaseModel):
+class Item(PublishableBaseModel, NamedBaseModel):
 
     text = models.TextField('описание', default='Sample Text',
                             help_text='Описание товара',
-                            validators=[validate_words('превосходно',
-                                                       'роскошно')])
+                            validators=(validate_words('превосходно',
+                                                       'роскошно'),))
     category = models.ForeignKey(Category, verbose_name='категория',
                                  help_text='Категория товара',
                                  on_delete=models.CASCADE, null=True,
@@ -106,8 +94,7 @@ class Item(PublishableBaseModel):
     image_tmb.allow_tags = True
 
 
-class SecondaryImage(models.Model):
-    name = models.CharField('Название', max_length=150, null=True)
+class SecondaryImage(NamedBaseModel):
     image = models.ImageField('Картинка',
                               upload_to='images/%Y/%m',
                               null=True)

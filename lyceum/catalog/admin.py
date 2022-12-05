@@ -20,9 +20,7 @@ class ItemAdmin(AdminImageMixin, SummernoteModelAdmin):
     list_display_links = ('name',)
     filter_horizontal = ('tags',)
     readonly_fields = ('image_tmb',)
-    inlines = [
-        SecondaryImageInline,
-    ]
+    inlines = (SecondaryImageInline,)
 
 
 @admin.register(SecondaryImage)
