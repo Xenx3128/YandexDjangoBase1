@@ -57,8 +57,7 @@ class Item(PublishableBaseModel, NamedBaseModel):
                                                        'роскошно'),))
     category = models.ForeignKey(Category, verbose_name='категория',
                                  help_text='Категория товара',
-                                 on_delete=models.CASCADE, null=True,
-                                 related_name='items')
+                                 on_delete=models.CASCADE, null=True,)
     is_on_main = models.BooleanField('на главной странице',
                                      default=False)
 
@@ -74,6 +73,7 @@ class Item(PublishableBaseModel, NamedBaseModel):
     class Meta:
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
+        default_related_name = 'items'
 
     def get_absolute_url(self):
         return reverse('catalog:item_detail', kwargs={"pk": self.pk})
