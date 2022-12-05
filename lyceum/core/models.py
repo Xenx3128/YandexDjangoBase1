@@ -10,7 +10,7 @@ class PublishableBaseModel(models.Model):
 
 
 class NamedBaseModel(models.Model):
-    name = models.CharField('название', max_length=150, blank=True, null=True)
+    name = models.CharField('название', max_length=150, blank=True,)
 
     class Meta:
         abstract = True
@@ -21,7 +21,7 @@ class NamedBaseModel(models.Model):
 
 class SluggedBaseModel(models.Model):
     slug = models.SlugField('слаг', max_length=200, unique=True,
-                            help_text='Слаг')
+                            blank=True, help_text='Слаг')
 
     class Meta:
         abstract = True

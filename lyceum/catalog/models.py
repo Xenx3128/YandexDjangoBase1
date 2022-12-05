@@ -19,7 +19,8 @@ class Category(PublishableBaseModel, NamedBaseModel, SluggedBaseModel):
     weight = models.IntegerField(default=100,
                                  help_text='Вес категории',
                                  validators=(MinValueValidator(1),
-                                             MaxValueValidator(32766)))
+                                             MaxValueValidator(32766)),
+                                 blank=True, null=True)
 
     class Meta:
         verbose_name = 'категория'
@@ -31,7 +32,8 @@ class Item(PublishableBaseModel, NamedBaseModel):
     text = models.TextField('описание', default='Sample Text',
                             help_text='Описание товара',
                             validators=(validate_words('превосходно',
-                                                       'роскошно'),))
+                                                       'роскошно'),),
+                            blank=True)
     category = models.ForeignKey(Category, verbose_name='категория',
                                  help_text='Категория товара',
                                  on_delete=models.CASCADE, null=True,)
