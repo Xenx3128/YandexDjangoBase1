@@ -1,41 +1,41 @@
 {% load static %}
 
 {% for item in items %}
-{% if app_name == 'catalog' %}
-{% ifchanged item.category %}
-<hr style="max-width: 800px;">
-<h4>{{ item.category.name }}</h4>
-<hr style="max-width: 800px;">
-{% endifchanged %}
-{% endif %}
-<div class="card mb-3" style="max-width: 800px;">
-    <div class="row g-0">
-      <div class="col-md-4">
-        {% if item.main_image %}
-        <img src="{{ item.main_image.url }}" class="img-fluid rounded-start" alt="Image">
-        {% else %}
-        <img src="{% static 'img/placeholder_image.jpg' %}" class="img-fluid rounded-start" alt="Image">
-        {% endif %}
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h4 class="card-title">{{ item.name }}</h5>
-          <p style="color: #8f8f8f;">{{item.category.name}}</p>
-          <hr>
-          <p class="card-text">{{ item.text|truncatewords_html:10 }}</p>
-          <a class="btn btn-danger card-button" role="button" aria-disabled="true" href="{{ item.get_absolute_url }}">Подробнее...</a>
+  {% if request.path == '/catalog/' %}
+    {% ifchanged item.category %}
+      <hr style="max-width: 800px;">
+      <h4>{{ item.category.name }}</h4>
+      <hr style="max-width: 800px;">
+    {% endifchanged %}
+  {% endif %}
+  <div class="card mb-3" style="max-width: 800px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          {% if item.main_image %}
+          <img src="{{ item.main_image.url }}" class="img-fluid rounded-start" alt="Image">
+          {% else %}
+          <img src="{% static 'img/placeholder_image.jpg' %}" class="img-fluid rounded-start" alt="Image">
+          {% endif %}
         </div>
-      </div>  
+        <div class="col-md-8">
+          <div class="card-body">
+            <h4 class="card-title">{{ item.name }}</h5>
+            <p style="color: #8f8f8f;">{{item.category.name}}</p>
+            <hr>
+            <p class="card-text">{{ item.text|truncatewords_html:10 }}</p>
+            <a class="btn btn-danger card-button" role="button" aria-disabled="true" href="{{ item.get_absolute_url }}">Подробнее...</a>
+          </div>
+        </div>  
+      </div>
+    <div class="card-footer text-muted">
+      <span>
+        Теги: 
+        {% for tag in item.tags.all %}
+        {{ tag.name }},
+        {% endfor %}
+      </span>
     </div>
-  <div class="card-footer text-muted">
-    <span>
-      Теги: 
-      {% for tag in item.tags.all %}
-      {{ tag.name }},
-      {% endfor %}
-    </span>
   </div>
-</div>
-{% empty %}
-<h4>Товаров пока нет</h4>
+  {% empty %}
+    <h4>Товаров пока нет</h4>
 {% endfor %}
