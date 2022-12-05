@@ -1,5 +1,5 @@
-from django.contrib.auth.models import AbstractBaseUser, UserManager
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import (AbstractBaseUser, PermissionsMixin,
+                                        UserManager)
 from django.db import models
 from django.urls import reverse
 

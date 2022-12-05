@@ -1,7 +1,6 @@
+from catalog.models import Category, Item, SecondaryImage, Tag
 from django.contrib import admin
-
 from django_summernote.admin import SummernoteModelAdmin
-from catalog.models import Item, Category, Tag, SecondaryImage
 from sorl.thumbnail.admin import AdminImageMixin
 
 admin.site.register(Category)

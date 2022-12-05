@@ -1,8 +1,7 @@
-from django.test import Client, TestCase
+from catalog.models import Category, Item, Tag
 from django.core.exceptions import ValidationError
+from django.test import Client, TestCase
 from django.urls import reverse
-
-from catalog.models import Item, Category, Tag
 
 
 class StaticURLTest(TestCase):

@@ -1,13 +1,12 @@
-from django.core.validators import RegexValidator
-from django.core.validators import MinValueValidator, MaxValueValidator
+from Core.models import PublishableBaseModel
+from django.core.validators import (MaxValueValidator, MinValueValidator,
+                                    RegexValidator)
 from django.db import models
-from django.utils.safestring import mark_safe
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail
 
-from Core.models import PublishableBaseModel
 from .validators import validate_words
-
 
 slug_regex_validator = RegexValidator(r'^[0-9a-zA-Z\-_]*$',
                                       'Разрешены только цифры, буквы латиницы,'

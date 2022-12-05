@@ -1,9 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
-
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import SignUpForm, ProfileForm
+from .forms import ProfileForm, SignUpForm
 from .models import User
 
 

@@ -1,5 +1,6 @@
-from django.forms import ValidationError
 from functools import wraps
+
+from django.forms import ValidationError
 
 
 def validate_words(*words):
