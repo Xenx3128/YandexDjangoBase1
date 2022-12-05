@@ -2,9 +2,16 @@ from django.db import models
 
 
 class Feedback(models.Model):
-    text = models.TextField('отзыв', max_length=500, default='Пример отзыва',
-                            blank=True)
-    created_on = models.DateTimeField('дата создания', auto_now_add=True)
+    text = models.TextField(
+        'отзыв',
+        max_length=500,
+        default='Пример отзыва',
+        blank=True,
+    )
+    created_on = models.DateTimeField(
+        'дата создания',
+        auto_now_add=True,
+    )
 
     class Meta:
         verbose_name = 'отзыв'

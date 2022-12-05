@@ -7,12 +7,17 @@ class ItemManager(models.Manager):
     def published_main(self):
         return (
             self.get_queryset()
-                .filter(is_published=True, is_on_main=True)
+                .filter(
+                    is_published=True,
+                    is_on_main=True
+                )
                 .select_related('category')
                 .order_by('name')
                 .prefetch_related(
-                    models.Prefetch('tags',
-                                    queryset=local_models.Tag.objects.all())
+                    models.Prefetch(
+                        'tags',
+                        queryset=local_models.Tag.objects.all()
+                    )
                 )
         )
 
@@ -21,9 +26,14 @@ class ItemManager(models.Manager):
             self.get_queryset()
                 .filter(is_published=True)
                 .select_related('category')
-                .order_by('category__name', 'name')
+                .order_by(
+                    'category__name',
+                    'name',
+                )
                 .prefetch_related(
-                    models.Prefetch('tags',
-                                    queryset=local_models.Tag.objects.all())
+                    models.Prefetch(
+                        'tags',
+                        queryset=local_models.Tag.objects.all()
+                    )
                 )
         )
