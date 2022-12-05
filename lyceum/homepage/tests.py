@@ -8,7 +8,7 @@ class StaticURLTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_homepage_wrong_address(self):
-        response = Client().get('home/')
+        response = Client().get('/home/')
         self.assertEqual(response.status_code, 404)
 
 
