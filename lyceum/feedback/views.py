@@ -12,12 +12,14 @@ def feedback(request):
         Feedback.objects.create(
             text=text,
         )
-        send_mail('Спасибо за Отзыв',
-                  f'Спасибо, мы получили ваш отзыв:\n {text} \n С вашей '
-                  'помощью, мы становимcя лучше. \n Resupply ',
-                  'noreply@example.com',
-                  ['user@example.com'],
-                  fail_silently=False)
+        send_mail(
+            'Спасибо за Отзыв',
+            f'Спасибо, мы получили ваш отзыв:\n {text} \n С вашей '
+            'помощью, мы становимcя лучше. \n Resupply ',
+            'noreply@example.com',
+            ['user@example.com'],
+            fail_silently=False,
+        )
 
         return redirect(request.path)
 

@@ -38,7 +38,7 @@ class ProfileForm(UserChangeForm):
             User.birthday.field.name,
         )
         widgets = {
-            User.birthday.field.name: DateInput(),
+            'birthday': DateInput(),
         }
 
     def __init__(self, *args, **kwargs):
