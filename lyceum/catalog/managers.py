@@ -10,7 +10,7 @@ class ItemManager(models.Manager):
                 .filter(
                     is_published=True,
                     is_on_main=True
-                )
+                    )
                 .select_related('category')
                 .order_by('name')
                 .prefetch_related(
@@ -28,8 +28,8 @@ class ItemManager(models.Manager):
                 .select_related('category')
                 .order_by(
                     'category__name',
-                    'name',
-                )
+                    'name'
+                    )
                 .prefetch_related(
                     models.Prefetch(
                         'tags',
