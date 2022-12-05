@@ -24,5 +24,4 @@ def feedback(request):
     context = {
         'form': form,
     }
-    return render(request, template_name='feedback/feedback.html',
-                  context=context)
+    return render(request, 'feedback/feedback.html', context)

@@ -9,8 +9,7 @@ def item_list(request):
         'items': items,
         'app_name': 'catalog',
     }
-    return render(request, template_name='catalog/item_list.html',
-                  context=context)
+    return render(request, 'catalog/item_list.html', context)
 
 
 def item_detail(request, pk):
@@ -19,5 +18,4 @@ def item_detail(request, pk):
         'item': item,
         'app_name': 'catalog',
     }
-    return render(request, template_name='catalog/item_detail.html',
-                  context=context)
+    return render(request, 'catalog/item_detail.html', context)

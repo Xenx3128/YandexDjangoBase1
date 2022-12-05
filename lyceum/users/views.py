@@ -15,7 +15,7 @@ def register(request):
     context = {
         'form': form,
     }
-    return render(request, template_name='users/signup.html', context=context)
+    return render(request, 'users/signup.html', context)
 
 
 @login_required
@@ -30,7 +30,7 @@ def profile(request):
     context = {
         'form': form,
     }
-    return render(request, template_name='users/profile.html', context=context)
+    return render(request, 'users/profile.html', context)
 
 
 def user_list(request):
@@ -38,8 +38,7 @@ def user_list(request):
     context = {
         'users': users,
     }
-    return render(request, template_name='users/user_list.html',
-                  context=context)
+    return render(request, 'users/user_list.html', context)
 
 
 def user_detail(request, pk):
@@ -47,5 +46,4 @@ def user_detail(request, pk):
     context = {
         'user': user,
     }
-    return render(request, template_name='users/user_detail.html',
-                  context=context)
+    return render(request, 'users/user_detail.html', context)
