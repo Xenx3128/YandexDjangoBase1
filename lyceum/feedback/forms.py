@@ -14,7 +14,5 @@ class FeedbackForm(forms.ModelForm):
         fields = (Feedback.text.field.name,)
         labels = {
            Feedback.text.field.name: 'Ваш отзыв',
-        }
-        help_texts = {
-            'text': 'Текст вашего отзыва',
+           Feedback.email.field.name: 'Ваша почта',
         }

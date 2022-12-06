@@ -8,6 +8,9 @@ class Feedback(models.Model):
         default='Пример отзыва',
         blank=True,
     )
+    email = models.EmailField(
+        help_text='Введите почту'
+    )
     created_on = models.DateTimeField(
         'дата создания',
         auto_now_add=True,
