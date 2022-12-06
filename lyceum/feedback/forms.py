@@ -11,7 +11,10 @@ class FeedbackForm(forms.ModelForm):
 
     class Meta:
         model = Feedback
-        fields = (Feedback.text.field.name,)
+        fields = (
+            Feedback.text.field.name,
+            Feedback.email.field.name,    
+        )
         labels = {
            Feedback.text.field.name: 'Ваш отзыв',
            Feedback.email.field.name: 'Ваша почта',
