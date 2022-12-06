@@ -18,20 +18,23 @@ class FeedbackTest(TestCase):
     def test_text_label(self):
         text_label = FeedbackTest.form.fields['text'].label
         self.assertEquals(text_label, 'Ваш отзыв')
-
-    def test_text_help_text(self):
-        text_help_text = FeedbackTest.form.fields['text'].help_text
-        self.assertEquals(text_help_text, 'Текст вашего отзыва')
+    
+    def test_email_label(self):
+        email_label = FeedbackTest.form.fields['email'].label
+        self.assertEquals(email_label, 'Ваша почта')
 
     def test_create_feedback(self):
         feedback_count = Feedback.objects.count()
         form_data = {
             'text': 'qwerty',
+            'email': 'example@yandex.ru',
         }
 
-        response = Client().post(reverse('feedback:feedback'),
-                                 data=form_data,
-                                 follow=True)
+        response = Client().post(
+            reverse('feedback:feedback'),
+            data=form_data,
+            follow=True,
+        )
 
         self.assertRedirects(response, reverse('feedback:feedback'))
 
@@ -40,5 +43,6 @@ class FeedbackTest(TestCase):
         self.assertTrue(
             Feedback.objects.filter(
                 text='qwerty',
+                email='example@yandex.ru',
             ).exists()
         )
