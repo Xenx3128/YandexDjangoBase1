@@ -9,7 +9,7 @@ class Feedback(models.Model):
         blank=True,
     )
     email = models.EmailField(
-        help_text='Введите почту'
+        default='example@yandex.ru',
     )
     created_on = models.DateTimeField(
         'дата создания',
