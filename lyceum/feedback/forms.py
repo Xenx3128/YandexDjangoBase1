@@ -13,7 +13,7 @@ class FeedbackForm(forms.ModelForm):
         model = Feedback
         fields = (
             Feedback.text.field.name,
-            Feedback.email.field.name,    
+            Feedback.email.field.name,
         )
         labels = {
            Feedback.text.field.name: 'Ваш отзыв',
