@@ -18,7 +18,7 @@ class FeedbackTest(TestCase):
     def test_text_label(self):
         text_label = FeedbackTest.form.fields['text'].label
         self.assertEquals(text_label, 'Ваш отзыв')
-    
+
     def test_email_label(self):
         email_label = FeedbackTest.form.fields['email'].label
         self.assertEquals(email_label, 'Ваша почта')
