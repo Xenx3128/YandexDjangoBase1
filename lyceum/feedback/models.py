@@ -10,6 +10,7 @@ class Feedback(models.Model):
     )
     email = models.EmailField(
         default='example@yandex.ru',
+        max_length=254,
     )
     created_on = models.DateTimeField(
         'дата создания',
