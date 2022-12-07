@@ -1,53 +1,61 @@
 from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic import ListView, DetailView
 
 from .forms import ProfileForm, SignUpForm
 from .models import User
 
 
-def register(request):
-    form = SignUpForm(request.POST or None)
-    if form.is_valid():
+class SignUpView(CreateView):
+    template_name = 'users/signup.html'
+    form_class = SignUpForm
+
+    def form_valid(self, form):
         user = form.save()
-        login(request, user)
+        login(self.request, user)
         return redirect('homepage:home')
-    context = {
-        'form': form,
-    }
-    return render(request, 'users/signup.html', context)
+
+    def form_invalid(self, form):
+        return render(self.request, 'users/signup.html',
+                      {'form': form})
+
+    def get_form(self):
+        return SignUpForm(self.request.POST or None)
 
 
-@login_required
-def profile(request):
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=request.user)
-    else:
-        form = ProfileForm(instance=request.user)
-    if form.is_valid():
+class ProfileView(LoginRequiredMixin, UpdateView):
+    template_name = 'users/profile.html'
+    pk = 1
+    model = User
+    form_class = ProfileForm
+
+    def get_object(self):
+        return self.request.user
+
+    def form_valid(self, form):
         form.save()
         return redirect('homepage:home')
-    context = {
-        'form': form,
-    }
-    return render(request, 'users/profile.html', context)
+
+    def get_form(self):
+        return ProfileForm(self.request.POST or None,
+                           instance=self.request.user)
 
 
-def user_list(request):
-    users = User.objects.filter(is_active=True)
-    context = {
-        'users': users,
-    }
-    return render(request, 'users/user_list.html', context)
+class UsersView(ListView):
+
+    template_name = 'users/user_list.html'
+    model = User
+    context_object_name = 'users'
+
+    def get_queryset(self):
+        return User.objects.filter(is_active=True)
 
 
-def user_detail(request, pk):
-    user = get_object_or_404(
-        User,
-        pk=pk,
-        is_active=True
-    )
-    context = {
-        'user': user,
-    }
-    return render(request, 'users/user_detail.html', context)
+class UserDetailView(DetailView):
+    template_name = 'users/user_detail.html'
+    model = User
+
+    def get_object(self):
+        return get_object_or_404(User, pk=self.kwargs['pk'])

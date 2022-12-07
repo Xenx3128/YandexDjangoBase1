@@ -65,22 +65,22 @@ urlpatterns = [
     ),
     path(
         'signup/',
-        views.register,
+        views.SignUpView.as_view(),
         name='signup'
     ),
     path(
         'profile/',
-        views.profile,
+        views.ProfileView.as_view(),
         name='profile'
     ),
     path(
         'user_list/',
-        views.user_list,
+        views.UsersView.as_view(),
         name='user_list'
     ),
     re_path(
         r'^user_detail/(?P<pk>[1-9][0-9]*)/$',
-        views.user_detail,
+        views.UserDetailView.as_view(),
         name='user_detail'
     ),
 ]

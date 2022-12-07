@@ -68,7 +68,7 @@ class Item(PublishableBaseModel, NamedBaseModel):
         upload_to='images/%Y/%m',
         null=True,
         blank=True,
-        )
+    )
 
     objects = ItemManager()
 
