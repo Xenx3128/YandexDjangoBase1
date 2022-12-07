@@ -36,3 +36,4 @@ class Rating(models.Model):
         verbose_name = 'Оценка'
         verbose_name_plural = 'Рейтинг'
         unique_together = ('user', 'item')
+        constraints = (models.UniqueConstraint(fields=("user", "item"),))
