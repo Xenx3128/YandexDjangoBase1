@@ -1,10 +1,11 @@
 from catalog.models import Item
+from users.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 
 class Rating(models.Model):
-    rating = models.CharField(
+    rating = models.IntegerField(
         'оценка',
         help_text='1- \'Ненависть\','
                   '2 - \'Неприязнь\','
@@ -18,6 +19,12 @@ class Rating(models.Model):
         blank=True,
         null=True,
     )
+    user = models.ForeignKey(
+        User,
+        verbose_name='пользователь',
+        on_delete=models.CASCADE,
+        null=True
+    )
     item = models.ForeignKey(
         Item,
         verbose_name='товар',
@@ -28,3 +35,4 @@ class Rating(models.Model):
     class Meta:
         verbose_name = 'Оценка'
         verbose_name_plural = 'Рейтинг'
+        unique_together = ('user', 'item')
