@@ -12,12 +12,10 @@ class RatingForm(forms.ModelForm):
     class Meta:
         model = Rating
         fields = (
-            Rating.text.field.name,
-            Rating.email.field.name,
+            Rating.rating.field.name,
         )
         labels = {
-           Rating.text.field.name: 'Ваш отзыв',
-           Rating.email.field.name: 'Ваша почта',
+           Rating.rating.field.name: 'Ваша оценка',
         }
 
     def __init__(self, *args, **kwargs):
