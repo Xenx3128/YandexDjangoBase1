@@ -1,10 +1,16 @@
 from catalog.models import Item
 from users.models import User
-from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 
 class Rating(models.Model):
+    RATING_CHOICES = (
+        (1, 'Ненависть'),
+        (2, 'Неприязнь'),
+        (3, 'Нейтрально'),
+        (4, 'Обожание'),
+        (5, 'Любовь'),
+    )
     rating = models.IntegerField(
         'оценка',
         help_text='1- \'Ненависть\','
@@ -12,10 +18,7 @@ class Rating(models.Model):
                   '3 - \'Нейтрально\','
                   '4 -\'Обожание\','
                   '5 - \'Любовь\'',
-        validators=(
-            MinValueValidator(1),
-            MaxValueValidator(5),
-        ),
+        choices=RATING_CHOICES,
         blank=True,
         null=True,
     )
