@@ -1,0 +1,12 @@
+<div class="dropdown">
+  <a class="btn btn-warning dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+    Именинники!
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    {% for birth_user in birth_users %}
+      <a class="dropdown-item" href="{{ birth_user.get_absolute_url }}" %}">{{ birth_user.username }} {{ birth_user.email }}</a>
+    {% empty %}
+      <p class="dropdown-item"><b>Сегодня именнинников нет</b></p>
+    {% endfor %}
+  </ul>
+</div>
