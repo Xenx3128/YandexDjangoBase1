@@ -1,6 +1,7 @@
 from catalog.models import Item
 from users.models import User
 from django.db import models
+from django.urls import reverse
 
 
 class Rating(models.Model):
@@ -25,12 +26,14 @@ class Rating(models.Model):
     user = models.ForeignKey(
         User,
         verbose_name='пользователь',
+        related_name='rating',
         on_delete=models.CASCADE,
         null=True
     )
     item = models.ForeignKey(
         Item,
         verbose_name='товар',
+        related_name='rating',
         on_delete=models.CASCADE,
         null=True
     )
@@ -44,3 +47,6 @@ class Rating(models.Model):
                 name='user_item_unique',
             ),
         )
+
+    def get_absolute_url(self):
+        return reverse('rating:rating', kwargs={"item_id": self.item_id})
