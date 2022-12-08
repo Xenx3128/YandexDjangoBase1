@@ -15,7 +15,7 @@ class ContextProcessorTest(TestCase):
             birthday=datetime.date.today())
         response = self.client.get(reverse('homepage:home'))
         self.assertEqual(len(response.context['birth_users']), 1)
-        self.assertEqual(response.context['birth_users'], [user])
+        self.assertEqual(list(response.context['birth_users']), [user])
 
     def test_processor_diff_url(self):
         user = User.objects.create_user(
@@ -25,7 +25,7 @@ class ContextProcessorTest(TestCase):
             birthday=datetime.date.today())
         response = self.client.get(reverse('catalog:item_list'))
         self.assertEqual(len(response.context['birth_users']), 1)
-        self.assertEqual(response.context['birth_users'], [user])
+        self.assertEqual(list(response.context['birth_users']), [user])
 
     def test_processor_diff_year(self):
         bday = datetime.date.today().replace(year=1945)
@@ -36,7 +36,7 @@ class ContextProcessorTest(TestCase):
             birthday=bday)
         response = self.client.get(reverse('catalog:item_list'))
         self.assertEqual(len(response.context['birth_users']), 1)
-        self.assertEqual(response.context['birth_users'], [user])
+        self.assertEqual(list(response.context['birth_users']), [user])
 
     def test_processor_no_bdays(self):
         bday = datetime.date.today() + datetime.timedelta(days=10)
@@ -47,7 +47,7 @@ class ContextProcessorTest(TestCase):
             birthday=bday)
         response = self.client.get(reverse('catalog:item_list'))
         self.assertEqual(len(response.context['birth_users']), 0)
-        self.assertEqual(response.context['birth_users'], [])
+        self.assertEqual(list(response.context['birth_users']), [])
 
     def test_processor_multiple_bdays(self):
         users = []
@@ -63,7 +63,7 @@ class ContextProcessorTest(TestCase):
             birthday=datetime.date.today()))
         response = self.client.get(reverse('catalog:item_list'))
         self.assertEqual(len(response.context['birth_users']), 2)
-        self.assertEqual(response.context['birth_users'], users)
+        self.assertEqual(list(response.context['birth_users']), users)
 
     def test_processor_some_bdays(self):
         users = []
@@ -85,4 +85,4 @@ class ContextProcessorTest(TestCase):
             birthday=bday)
         response = self.client.get(reverse('catalog:item_list'))
         self.assertEqual(len(response.context['birth_users']), 2)
-        self.assertEqual(response.context['birth_users'], users)
+        self.assertEqual(list(response.context['birth_users']), users)
