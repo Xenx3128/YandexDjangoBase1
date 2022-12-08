@@ -11,7 +11,6 @@ def birthdays(request):
             today = datetime.date.today().strftime('%b %d')
             if birthday == today:
                 bday_users.append(user)
-    print(bday_users)
     return {
         'birth_users': bday_users,
     }
