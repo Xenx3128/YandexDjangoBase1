@@ -5,6 +5,7 @@ from .models import Rating
 
 class RatingForm(forms.ModelForm):
     rating = forms.ChoiceField(
+        label='Ваша оценка',
         widget=forms.RadioSelect,
         choices=Rating.RATING_CHOICES,
     )
@@ -14,11 +15,10 @@ class RatingForm(forms.ModelForm):
         fields = (
             Rating.rating.field.name,
         )
-        labels = {
-           Rating.rating.field.name: 'Ваша оценка',
-        }
 
     def __init__(self, *args, **kwargs):
+        init_rating = kwargs.pop('rating', None)
         super().__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.widget.attrs['class'] = 'form-control'
+        if init_rating:
+            print(init_rating)
+            self.fields['rating'].initial = init_rating.rating

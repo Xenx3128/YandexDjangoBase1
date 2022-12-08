@@ -1,24 +1,18 @@
 from catalog.models import Item
 from users.models import User
 from django.db import models
-from django.urls import reverse
 
 
 class Rating(models.Model):
     RATING_CHOICES = (
-        (1, 'Ненависть'),
-        (2, 'Неприязнь'),
-        (3, 'Нейтрально'),
-        (4, 'Обожание'),
-        (5, 'Любовь'),
+        (1, '1 - Ненависть'),
+        (2, '2 - Неприязнь'),
+        (3, '3 - Нейтрально'),
+        (4, '4 - Обожание'),
+        (5, '5 - Любовь'),
     )
     rating = models.IntegerField(
         'оценка',
-        help_text='1- \'Ненависть\','
-                  '2 - \'Неприязнь\','
-                  '3 - \'Нейтрально\','
-                  '4 -\'Обожание\','
-                  '5 - \'Любовь\'',
         choices=RATING_CHOICES,
         blank=True,
         null=True,
@@ -47,6 +41,3 @@ class Rating(models.Model):
                 name='user_item_unique',
             ),
         )
-
-    def get_absolute_url(self):
-        return reverse('rating:rating', kwargs={"item_id": self.item_id})

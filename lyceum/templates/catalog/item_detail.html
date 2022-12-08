@@ -30,7 +30,7 @@
             <p>Нет отзывов</p>
           {% endif %} 
           {% if user.is_authenticated %}
-            <a class="btn btn-danger card-button" role="button" aria-disabled="true" href="{{ item.rating.get_absolute_url }}">Оценить товар</a>
+            <a class="btn btn-danger card-button" role="button" aria-disabled="true" href="{% url 'rating:rating' item_id=item.pk %}">Оценить товар</a>
           {% endif%}
         </div>
       </div>  
