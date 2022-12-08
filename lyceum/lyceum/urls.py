@@ -12,6 +12,7 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     path('auth/', include('users.urls')),
     path('auth/', include('django.contrib.auth.urls')),
+    path('rating/', include('rating.urls'))
 ]
 
 if settings.DEBUG:

@@ -23,6 +23,15 @@
           <p style="color: #8f8f8f;">{{item.category.name}}</p>
           <hr>
           <p class="card-text">{{ item.text }}</p>
+          <p>{{ rating_avg }}|{{ rating_count }}</p>  
+          {% if rating_count > 0 %}
+            <p>{{ rating_avg }}|{{ rating_count }}</p>  
+          {% else %}
+            <p>Нет отзывов</p>
+          {% endif %} 
+          {% if user.is_authenticated %}
+            <a class="btn btn-danger card-button" role="button" aria-disabled="true" href="{{ item.rating.get_absolute_url }}">Оценить товар</a>
+          {% endif%}
         </div>
       </div>  
     </div>
@@ -32,7 +41,7 @@
       {% for tag in item.tags.all %}
       {{ tag.name }},
       {% endfor %}
-    </span>
+    </span> 
   </div>
 </div>
 {% endblock %}
