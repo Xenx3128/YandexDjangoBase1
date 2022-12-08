@@ -23,9 +23,15 @@
           <p style="color: #8f8f8f;">{{item.category.name}}</p>
           <hr>
           <p class="card-text">{{ item.text }}</p>
-          <p>{{ rating_avg }}|{{ rating_count }}</p>  
           {% if rating_count > 0 %}
-            <p>{{ rating_avg }}|{{ rating_count }}</p>  
+            <p>Рейтинг товара: <b>{{ rating_avg }}</b>| Количество оценок: <b>{{ rating_count }}</b></p>  
+            {% if user.is_authenticated %}
+              {% if user_rating %}
+                <p>Ваша оценка: <b>{{ user_rating.rating }}</b></p>
+              {% else %}
+                <p>Ваша оценка: <span style="color: #8f8f8f;">Нет</span></p>
+              {% endif %}
+            {% endif %}
           {% else %}
             <p>Нет отзывов</p>
           {% endif %} 
