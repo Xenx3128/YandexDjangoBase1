@@ -36,7 +36,6 @@ class RatingView(LoginRequiredMixin, FormView):
         return redirect('users:user_detail', pk=self.request.user.pk)
 
     def form_invalid(self, form):
-        print('//////////////////////////////////')
         return render(
             self.request,
             self.template_name,

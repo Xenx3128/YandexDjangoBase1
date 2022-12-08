@@ -20,5 +20,4 @@ class RatingForm(forms.ModelForm):
         init_rating = kwargs.pop('rating', None)
         super().__init__(*args, **kwargs)
         if init_rating:
-            print(init_rating)
             self.fields['rating'].initial = init_rating.rating

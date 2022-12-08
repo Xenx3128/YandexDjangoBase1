@@ -18,23 +18,26 @@
         {% endif %}
       </div>
       <div class="col-md-8">
-        <div class="card-body">
+        <div class="card-body d-flex flex-column">
           <h4 class="card-title">{{ item.name }}</h5>
           <p style="color: #8f8f8f;">{{item.category.name}}</p>
           <hr>
           <p class="card-text">{{ item.text }}</p>
-          {% if rating_count > 0 %}
-            <p>Рейтинг товара: <b>{{ rating_avg }}</b>| Количество оценок: <b>{{ rating_count }}</b></p>  
-            {% if user.is_authenticated %}
-              {% if user_rating %}
-                <p>Ваша оценка: <b>{{ user_rating.rating }}</b></p>
-              {% else %}
-                <p>Ваша оценка: <span style="color: #8f8f8f;">Нет</span></p>
+          <div class="">
+            {% if rating_count > 0 %}
+
+              <span>Рейтинг товара: <b>{{ rating_avg|floatformat:1 }}</b>| Количество оценок: <b>{{ rating_count }}</b></span>  
+              {% if user.is_authenticated %}
+                {% if user_rating %}
+                  <p>Ваша оценка: <b>{{ user_rating.rating }}</b></p>
+                {% else %}
+                  <p>Ваша оценка: <span style="color: #8f8f8f;">Нет</span></p>
+                {% endif %}
               {% endif %}
-            {% endif %}
-          {% else %}
-            <p>Нет отзывов</p>
-          {% endif %} 
+            {% else %}
+              <p style="color: #8f8f8f;">Нет отзывов</p>
+            {% endif %} 
+          </div>
           {% if user.is_authenticated %}
             <a class="btn btn-danger card-button" role="button" aria-disabled="true" href="{% url 'rating:rating' item_id=item.pk %}">Оценить товар</a>
           {% endif%}
