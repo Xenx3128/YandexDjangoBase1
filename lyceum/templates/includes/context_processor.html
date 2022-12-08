@@ -4,7 +4,7 @@
   </a>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
     {% for birth_user in birth_users %}
-      <a class="dropdown-item" href="{{ birth_user.get_absolute_url }}" %}">{{ birth_user.first_name }} {{ birth_user.email }}</a>
+      <a class="dropdown-item" href="{{ birth_user.get_absolute_url }}" %}">{{ birth_user.username }} {{ birth_user.email }}</a>
     {% empty %}
       <p class="dropdown-item"><b>Сегодня именнинников нет</b></p>
     {% endfor %}
