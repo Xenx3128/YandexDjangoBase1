@@ -4,13 +4,14 @@ from users.models import User
 
 
 def birthdays(request):
-    list = []
+    bday_users = []
     for user in User.objects.all():
         if user.birthday:
             birthday = user.birthday.strftime('%b %d')
             today = datetime.date.today().strftime('%b %d')
             if birthday == today:
-                list.append(user)
+                bday_users.append(user)
+    print(bday_users)
     return {
-        'birth_users': list,
+        'birth_users': bday_users,
     }
