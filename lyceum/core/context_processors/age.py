@@ -4,12 +4,9 @@ from users.models import User
 
 
 def birthdays(request):
-    today = datetime.date.today()
-    birthdays = User.objects.filter(birthday__lte=today)
+    day, month = datetime.date.today().day, datetime.date.today().month
+    birthdays = User.objects.filter(birthday__day=day, birthday__month=month)
 
-    # list = [user for user in User.objects.all()
-    #         if user.birthday.strftime('%b %d') ==
-    #         datetime.date.today().strftime('%b %d')]
     return {
         'birth_users': birthdays,
     }
