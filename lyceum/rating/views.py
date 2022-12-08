@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from catalog.models import Item
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect, render
 from django.views.generic import FormView
 
 from .forms import RatingForm
 from .models import Rating
-from catalog.models import Item
 
 
 class RatingView(LoginRequiredMixin, FormView):

@@ -1,7 +1,7 @@
-from django.shortcuts import get_object_or_404
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
 from django.db.models import Avg, Count
+from django.shortcuts import get_object_or_404
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
 from .models import Item
 
