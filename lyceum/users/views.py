@@ -1,8 +1,8 @@
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
-from django.views.generic import ListView, DetailView
 
 from .forms import ProfileForm, SignUpForm
 from .models import User
