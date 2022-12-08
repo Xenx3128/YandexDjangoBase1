@@ -20,16 +20,9 @@
     <main>
       <div class="row">
         <div class="col-md-3">
-          <div class="dropdown">
-            <button class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Именинники!
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              {% for birth_user in birth_users %}
-                <a href="{{ birth_user.get_absolute_url }}" class="dropdown-item"> {{birth_user.first_name}} {{birth_user.email}} </a>
-              {% endfor %}
-            </ul>
-          </div>
+          {% block context_processor %}
+          {% include 'includes/context_processor.html' %}
+          {% endblock %}
       </div>
         <div class="col-md-6">
         {% block content %} No content for you {% endblock %}
