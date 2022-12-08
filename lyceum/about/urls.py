@@ -1,9 +1,12 @@
 from django.urls import path
-
-from . import views
+from django.views.generic import TemplateView
 
 app_name = 'about'
 
 urlpatterns = [
-    path('', views.description, name='description')
+    path(
+        '',
+        TemplateView.as_view(template_name='about/description.html'),
+        name='description'
+    )
 ]
