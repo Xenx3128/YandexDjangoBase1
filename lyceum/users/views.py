@@ -56,6 +56,7 @@ class UsersView(ListView):
 class UserDetailView(DetailView):
     template_name = 'users/user_detail.html'
     model = User
+    context_object_name = 'disp_user'
 
     def get_object(self):
         return get_object_or_404(User, pk=self.kwargs['pk'])
