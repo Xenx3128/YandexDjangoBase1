@@ -1,20 +1,44 @@
-from django.contrib.auth.models import (AbstractBaseUser, PermissionsMixin,
-                                        UserManager)
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    PermissionsMixin,
+    UserManager,
+)
 from django.db import models
 from django.urls import reverse
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField('имя пользователя', max_length=150,
-                                help_text='Не более 150 символов')
-    email = models.EmailField('электронная почта', max_length=254, unique=True,
-                              help_text='Не более 254 символов')
+    username = models.CharField(
+        'имя пользователя',
+        max_length=150,
+        help_text='Не более 150 символов',
+    )
+    email = models.EmailField(
+        'электронная почта',
+        max_length=254,
+        unique=True,
+        help_text='Не более 254 символов',
+    )
 
-    first_name = models.CharField('имя', max_length=254, blank=True, null=True,
-                                  help_text='Не более 254 символов')
-    last_name = models.CharField('фамилия', max_length=254, blank=True,
-                                 null=True, help_text='Не более 254 символов')
-    birthday = models.DateField('день рождения', null=True, blank=True)
+    first_name = models.CharField(
+        'имя',
+        max_length=254,
+        blank=True,
+        null=True,
+        help_text='Не более 254 символов',
+    )
+    last_name = models.CharField(
+        'фамилия',
+        max_length=254,
+        blank=True,
+        null=True,
+        help_text='Не более 254 символов',
+    )
+    birthday = models.DateField(
+        'день рождения',
+        null=True,
+        blank=True,
+    )
 
     is_staff = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
