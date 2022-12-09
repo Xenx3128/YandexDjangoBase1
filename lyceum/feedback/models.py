@@ -20,3 +20,6 @@ class Feedback(models.Model):
     class Meta:
         verbose_name = 'отзыв'
         verbose_name_plural = 'отзывы'
+
+    def __str__(self):
+        return self.text

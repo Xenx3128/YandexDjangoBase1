@@ -22,16 +22,16 @@ class ItemDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(self.object.rating.aggregate(
+        context.update(self.object.ratings.aggregate(
             rating_avg=Avg('rating')
         ))
-        context.update(self.object.rating.aggregate(
+        context.update(self.object.ratings.aggregate(
             rating_count=Count('rating')
         ))
         if self.request.user.is_authenticated:
             user = self.request.user
             item = Item.objects.get(pk=self.kwargs['pk'])
-            context['user_rating'] = user.rating.filter(
+            context['user_rating'] = user.ratings.filter(
                 user=user,
                 item=item
                 ).first()
