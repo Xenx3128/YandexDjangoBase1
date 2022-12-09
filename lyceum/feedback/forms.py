@@ -25,14 +25,14 @@ class FeedbackForm(forms.ModelForm):
 
     def save(self):
         instance = super().save()
-        instance.text = self.cleaned_data['text']
-        instance.email = self.cleaned_data['email']
+        instance.text = self.cleaned_data[Feedback.text.field.name]
+        instance.email = self.cleaned_data[Feedback.email.field.name]
         instance.save()
         return instance
 
     def send_mails(self):
-        text = self.cleaned_data['text']
-        email = self.cleaned_data['email']
+        text = self.cleaned_data[Feedback.text.field.name]
+        email = self.cleaned_data[Feedback.email.field.name]
         send_mail(
             'Спасибо за Отзыв',
             f'Спасибо, мы получили ваш отзыв:\n {text} \n С вашей '
