@@ -8,7 +8,7 @@ urlpatterns = [
     path('catalog/', include('catalog.urls')),
     path('about/', include('about.urls')),
     path('feedback/', include('feedback.urls')),
-    path('admin', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
     path('auth/', include('users.urls')),
     path('auth/', include('django.contrib.auth.urls')),
