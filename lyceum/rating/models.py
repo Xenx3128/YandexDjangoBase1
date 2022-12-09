@@ -41,3 +41,6 @@ class Rating(models.Model):
                 name='user_item_unique',
             ),
         )
+
+    def __str__(self):
+        return self.rating
