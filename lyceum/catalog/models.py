@@ -59,7 +59,6 @@ class Item(PublishableBaseModel, NamedBaseModel):
         'на главной странице',
         default=False
     )
-
     tags = models.ManyToManyField(
         Tag,
         verbose_name='теги',
