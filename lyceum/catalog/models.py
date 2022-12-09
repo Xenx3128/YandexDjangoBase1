@@ -13,6 +13,7 @@ class Tag(PublishableBaseModel, NamedBaseModel, SluggedBaseModel):
     class Meta:
         verbose_name = 'тег'
         verbose_name_plural = 'теги'
+        default_related_name = 'tags'
 
 
 class Category(PublishableBaseModel, NamedBaseModel, SluggedBaseModel):
@@ -30,6 +31,7 @@ class Category(PublishableBaseModel, NamedBaseModel, SluggedBaseModel):
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
+        default_related_name = 'categories'
 
 
 class Item(PublishableBaseModel, NamedBaseModel):
@@ -116,6 +118,7 @@ class SecondaryImage(NamedBaseModel):
     class Meta:
         verbose_name = 'картинка товара'
         verbose_name_plural = 'галерея'
+        default_related_name = 'sec_images'
 
     def __str__(self):
         return self.name

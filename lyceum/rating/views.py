@@ -15,7 +15,7 @@ class RatingView(LoginRequiredMixin, FormView):
         kwargs = super().get_form_kwargs()
         user = self.request.user
         item = Item.objects.get(pk=self.kwargs['item_id'])
-        rating = user.rating.filter(user=user, item=item).first()
+        rating = user.ratings.filter(user=user, item=item).first()
         if rating:
             kwargs['rating'] = rating
         return kwargs

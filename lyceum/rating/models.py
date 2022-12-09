@@ -20,14 +20,12 @@ class Rating(models.Model):
     user = models.ForeignKey(
         User,
         verbose_name='пользователь',
-        related_name='rating',
         on_delete=models.CASCADE,
         null=True
     )
     item = models.ForeignKey(
         Item,
         verbose_name='товар',
-        related_name='rating',
         on_delete=models.CASCADE,
         null=True
     )
@@ -35,6 +33,7 @@ class Rating(models.Model):
     class Meta:
         verbose_name = 'оценка'
         verbose_name_plural = 'оценки'
+        default_related_name = 'ratings'
         constraints = (
             models.UniqueConstraint(
                 fields=("user", "item"),
