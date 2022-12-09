@@ -38,10 +38,11 @@ class ProfileForm(UserChangeForm):
             User.birthday.field.name,
         )
         widgets = {
-            'birthday': DateInput(),
+            User.birthday.field.name: DateInput(),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        if self.initial['birthday']:
-            self.initial['birthday'] = self.instance.birthday.isoformat()
+        if self.initial[User.birthday.field.name]:
+            self.initial[User.birthday.field.name] \
+                = self.instance.birthday.isoformat()
