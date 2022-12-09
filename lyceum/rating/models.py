@@ -33,8 +33,8 @@ class Rating(models.Model):
     )
 
     class Meta:
-        verbose_name = 'Оценка'
-        verbose_name_plural = 'Рейтинг'
+        verbose_name = 'оценка'
+        verbose_name_plural = 'оценки'
         constraints = (
             models.UniqueConstraint(
                 fields=("user", "item"),
